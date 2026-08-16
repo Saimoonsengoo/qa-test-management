@@ -3,7 +3,7 @@ import { authenticate, requireRole } from "../../middleware/auth";
 import { validateBody } from "../../middleware/validate";
 import { asyncHandler } from "../../utils/asyncHandler";
 import * as controller from "./users.controller";
-import { createUserSchema, updateStatusSchema, updateUserSchema } from "./users.schema";
+import { createUserSchema, resetPasswordSchema, updateStatusSchema, updateUserSchema } from "./users.schema";
 
 export const usersRouter = Router();
 usersRouter.use(authenticate);
@@ -18,4 +18,10 @@ usersRouter.patch(
   requireRole("Admin"),
   validateBody(updateStatusSchema),
   asyncHandler(controller.updateStatusHandler)
+);
+usersRouter.patch(
+  "/:id/reset-password",
+  requireRole("Admin"),
+  validateBody(resetPasswordSchema),
+  asyncHandler(controller.resetPasswordHandler)
 );

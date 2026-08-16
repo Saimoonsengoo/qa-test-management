@@ -7,6 +7,11 @@ const NAV = [
   { to: "/defects", label: "Defects (all)" },
 ];
 
+const ADMIN_NAV = [
+  { to: "/admin/users", label: "Users" },
+  { to: "/admin/roles", label: "Roles & Permissions" },
+];
+
 export function Layout() {
   const { user, logout } = useAuth();
   const { projectId } = useParams();
@@ -57,6 +62,23 @@ export function Layout() {
               <span className="dot" />
               Reports
             </NavLink>
+          </>
+        )}
+        {user?.role.name === "Admin" && (
+          <>
+            <div className="section-title" style={{ marginTop: 16, padding: "0 10px" }}>
+              Administration
+            </div>
+            {ADMIN_NAV.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
+              >
+                <span className="dot" />
+                {item.label}
+              </NavLink>
+            ))}
           </>
         )}
         <div className="sidebar-footer">

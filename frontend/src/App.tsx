@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { AdminRoute } from "./components/AdminRoute";
 import { Layout } from "./components/Layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
@@ -14,6 +15,8 @@ import { DefectsPage } from "./pages/DefectsPage";
 import { DefectDetailPage } from "./pages/DefectDetailPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { AllDefectsPage } from "./pages/AllDefectsPage";
+import { UserManagementPage } from "./pages/UserManagementPage";
+import { PermissionManagementPage } from "./pages/PermissionManagementPage";
 
 export default function App() {
   return (
@@ -38,6 +41,22 @@ export default function App() {
           <Route path="/projects/:projectId/defects" element={<DefectsPage />} />
           <Route path="/projects/:projectId/defects/:defectId" element={<DefectDetailPage />} />
           <Route path="/projects/:projectId/reports" element={<ReportsPage />} />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <UserManagementPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/roles"
+            element={
+              <AdminRoute>
+                <PermissionManagementPage />
+              </AdminRoute>
+            }
+          />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,6 +1,15 @@
+export interface Permission {
+  id: string;
+  name: string;
+  description?: string | null;
+}
+
 export interface Role {
   id: string;
   name: string;
+  description?: string | null;
+  rolePermissions?: { permission: Permission }[];
+  _count?: { users: number };
 }
 
 export interface AuthUser {
@@ -9,6 +18,16 @@ export interface AuthUser {
   email: string;
   status: string;
   role: Role;
+}
+
+export interface ManagedUser {
+  id: string;
+  name: string;
+  email: string;
+  status: "ACTIVE" | "INACTIVE";
+  role: { id: string; name: string };
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type ProjectStatus = "PLANNING" | "ACTIVE" | "ON_HOLD" | "COMPLETED" | "ARCHIVED";
