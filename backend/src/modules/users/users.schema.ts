@@ -15,3 +15,7 @@ export const updateUserSchema = z.object({
 export const updateStatusSchema = z.object({
   status: z.enum(["ACTIVE", "INACTIVE"]),
 });
+
+export const resetPasswordSchema = z.object({
+  password: z.string().min(8),
+});
